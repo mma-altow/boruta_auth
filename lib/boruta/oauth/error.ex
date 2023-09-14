@@ -99,8 +99,8 @@ defmodule Boruta.Oauth.Error do
     %{error | format: response_mode(request), redirect_uri: redirect_uri, state: state}
   end
 
-  def with_format(%Error{} = error, %TokenRequest{redirect_uri: redirect_uri, state: state}) do
-    %{error | format: :fragment, redirect_uri: redirect_uri, state: state}
+  def with_format(%Error{} = error, %TokenRequest{redirect_uri: redirect_uri, state: state} = request) do
+    %{error | format: :query, redirect_uri: redirect_uri, state: state}
   end
 
   defp response_mode(%HybridRequest{response_mode: "query"}), do: :query
