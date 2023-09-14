@@ -31,7 +31,7 @@ defmodule Boruta.Oauth.Authorization.Scope do
   def authorize(scope: nil, against: _against), do: {:ok, ""}
 
   def authorize(scope: "" <> scope, against: against) do
-    scopes = Scope.split(scope)
+    scopes = Scope.split(scope) |> Enum.uniq()
 
     public_scopes =
       ScopesAdapter.public()
